@@ -1,21 +1,13 @@
 # Creative Spaces
 
-Production snapshot of https://creative-spaces.com.au for the empty GitHub repo
-`cscreativespace/creative-spaces`.
+Latest deployed Grok build of https://creative-spaces.com.au
+and https://creativespaces.grok.me.
 
-Pulled 8 Oct 2026 (AEDT) from the live Vercel deploy. This is the built site,
-not the original TanStack Start / Grok app-builder source. The GitHub repository
-had no commits when this zip was made.
+Grok project id: `01a0f72a-c480-75a0-9333-97daf5ef3c20`
 
-## What is in here
-
-- `public/assets/` — current JS and CSS bundles
-- `public/images/` — site photography used on the homepage
-- `public/favicon.svg` — icon
-- `public/manifest.webmanifest`
-- `docs/homepage.html` — server-rendered homepage snapshot
-- `docs/plans.js` — published prices from the live bundle
-- `docs/checkout.js` — checkout bundle
+Pulled 9 Oct 2026 (AEDT) from the live Vercel deploy. This is the built app,
+not the editable Grok app-builder source. Source export is only available from
+the Grok project itself.
 
 ## Published prices (AUD)
 
@@ -23,19 +15,9 @@ had no commits when this zip was made.
 - AI & workflow integrations — $899
 - Ecommerce integration — $1,299
 
-## GitHub
+## What is in here
 
-Repo: https://github.com/cscreativespace/creative-spaces
-Owner: cscreativespace
-Default branch: main
-Status at snapshot: empty (no tree on main)
-
-To publish this snapshot:
-
-```bash
-git clone https://github.com/cscreativespace/creative-spaces.git
-# copy these files in, then
-git add .
-git commit -m "Add production snapshot of creative-spaces.com.au"
-git push origin main
-```
+- `public/assets/` — current JS and CSS bundles
+- `public/images/` — homepage photography
+- `docs/homepage.html` — server-rendered homepage snapshot
+- `docs/plans.js` — prices from the live bundle
