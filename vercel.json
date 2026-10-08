@@ -1,5 +1,22 @@
 {
   "framework": null,
   "buildCommand": null,
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "redirects": [
+    {
+      "source": "/pay/studio",
+      "destination": "https://buy.stripe.com/00wbJ033TgaUdfW1M45J600",
+      "permanent": false
+    },
+    {
+      "source": "/pay/campaign",
+      "destination": "https://buy.stripe.com/fZu8wO1ZP2k4b7O1M45J601",
+      "permanent": false
+    },
+    {
+      "source": "/pay/platform",
+      "destination": "https://buy.stripe.com/00waEWgUJgaUfo40I05J602",
+      "permanent": false
+    }
+  ]
 }
