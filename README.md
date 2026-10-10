@@ -21,3 +21,5 @@ the Grok project itself.
 - `public/images/` — homepage photography
 - `docs/homepage.html` — server-rendered homepage snapshot
 - `docs/plans.js` — prices from the live bundle
+
+Hero updated 11 Oct 2026: full-bleed editorial landing image (`public/images/hero-editorial.jpg`) with hotspot links to book a time and the work section. Pay buttons still go to live Stripe checkout.
