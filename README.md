@@ -1,13 +1,10 @@
 # Creative Spaces
 
-Latest deployed Grok build of https://creative-spaces.com.au
-and https://creativespaces.grok.me.
+Live site for [creative-spaces.com.au](https://www.creative-spaces.com.au).
 
-Grok project id: `01a0f72a-c480-75a0-9333-97daf5ef3c20`
+The landing page is the full-bleed editorial hero (`public/images/hero-editorial.jpg`). The buttons on that image go to booking and the work section. Below it: why it matters, proof, three published prices, the process, FAQ, and the booking panel.
 
-Pulled 9 Oct 2026 (AEDT) from the live Vercel deploy. This is the built app,
-not the editable Grok app-builder source. Source export is only available from
-the Grok project itself.
+Editable source: [cscreativespace/creativespaces](https://github.com/cscreativespace/creativespaces). This repository is what Vercel publishes to the domain.
 
 ## Published prices (AUD)
 
@@ -15,11 +12,4 @@ the Grok project itself.
 - AI & workflow integrations — $899
 - Ecommerce integration — $1,299
 
-## What is in here
-
-- `public/assets/` — current JS and CSS bundles
-- `public/images/` — homepage photography
-- `docs/homepage.html` — server-rendered homepage snapshot
-- `docs/plans.js` — prices from the live bundle
-
-Hero updated 11 Oct 2026: full-bleed editorial landing image (`public/images/hero-editorial.jpg`) with hotspot links to book a time and the work section. Pay buttons still go to live Stripe checkout.
+Pay buttons go to Stripe Checkout. Card keys stay on the host, not in this repo.
