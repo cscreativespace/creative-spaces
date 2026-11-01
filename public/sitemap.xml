@@ -12,4 +12,9 @@
     <loc>https://creative-spaces.com.au/contact</loc>
     <lastmod>2026-10-26</lastmod>
   </url>
+  <url>
+    <loc>https://creative-spaces.com.au/health-check/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

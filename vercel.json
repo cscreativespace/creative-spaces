@@ -2,7 +2,42 @@
   "framework": null,
   "buildCommand": null,
   "outputDirectory": "public",
+  "functions": {
+    "api/health-check.js": {
+      "maxDuration": 60,
+      "memory": 1024
+    },
+    "api/audit.js": {
+      "maxDuration": 60,
+      "memory": 1024
+    },
+    "api/health-check-pdf.js": {
+      "maxDuration": 30
+    },
+    "api/admin/health-checks.js": {
+      "maxDuration": 30
+    },
+    "api/cron/batch-health-check.js": {
+      "maxDuration": 300
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/batch-health-check",
+      "schedule": "0 21 * * 0"
+    }
+  ],
   "redirects": [
+    {
+      "source": "/audit",
+      "destination": "/health-check/",
+      "permanent": false
+    },
+    {
+      "source": "/audit/",
+      "destination": "/health-check/",
+      "permanent": false
+    },
     {
       "source": "/pay/studio",
       "destination": "https://buy.stripe.com/00wbJ033TgaUdfW1M45J600",

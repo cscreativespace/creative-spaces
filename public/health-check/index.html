@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free website health check | Creative Spaces</title>
+  <meta name="description" content="Paste your website. Get a calm, plain-English score for performance, SEO, trust, visual impact and local discoverability. Then book a free 15-minute chat with Chris." />
+  <meta name="theme-color" content="#f3eee6" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://creative-spaces.com.au/health-check/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free website health check | Creative Spaces" />
+  <meta property="og:description" content="A free score for your site, then a 15-minute chat with Chris if you want the full picture." />
+  <meta property="og:url" content="https://creative-spaces.com.au/health-check/" />
+  <meta property="og:image" content="https://creative-spaces.com.au/og.jpg" />
+  <meta property="og:locale" content="en_AU" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,620;1,9..144,500;1,9..144,620&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #f3eee6;
+      --paper-2: #e6dfd2;
+      --ink: #2B2A28;
+      --muted: #5e574e;
+      --copper: #C0613B;
+      --copper-deep: #8d4e32;
+      --line: #d8d0c3;
+      --card: #faf7f2;
+      --good: #2f6b4f;
+      --warn: #9a6b1f;
+      --poor: #C0613B;
+      --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+      --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font-sans); color: var(--ink); background: var(--paper); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    a { color: var(--copper); }
+    a:hover { color: var(--copper-deep); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    .wrap { width: 100%; max-width: 72rem; margin: 0 auto; padding-left: 1.25rem; padding-right: 1.25rem; }
+    header.site { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid color-mix(in srgb, var(--line) 80%, transparent); background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(16px); }
+    .header-row { display: flex; align-items: center; height: 5.25rem; gap: 1rem; }
+    .brand { display: inline-flex; align-items: center; gap: 0.625rem; color: var(--ink); text-decoration: none; }
+    .brand-kicker { display: block; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--copper); line-height: 1; }
+    .brand-name { display: block; font-family: var(--font-serif); font-size: 1.125rem; letter-spacing: -0.025em; line-height: 1.1; }
+    nav.desk { display: none; flex: 1; justify-content: center; gap: 2rem; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
+    nav.desk a { color: color-mix(in srgb, var(--ink) 75%, transparent); text-decoration: none; }
+    nav.desk a:hover { color: var(--copper); }
+    @media (min-width: 900px) { nav.desk { display: flex; } }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 2.75rem; padding: 0 1.25rem; border-radius: 999px; border: 0; background: var(--copper); color: #fff; font: inherit; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; cursor: pointer; }
+    .btn:hover { background: var(--copper-deep); color: #fff; }
+    .btn:disabled { opacity: 0.55; cursor: wait; }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .btn-ghost:hover { border-color: var(--copper); color: var(--copper); background: transparent; }
+    .hero { padding: 3.5rem 0 2rem; }
+    .hero h1 { font-family: var(--font-serif); font-weight: 500; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 1rem; max-width: 16ch; }
+    .hero p.lead { max-width: 40rem; color: var(--muted); margin: 0 0 2rem; font-size: 1.05rem; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 1.25rem; padding: 1.5rem; }
+    label { display: block; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    input[type=text], input[type=url], input[type=email] { width: 100%; height: 2.75rem; border-radius: 0.75rem; border: 1px solid var(--line); background: #fff; padding: 0 0.9rem; font: inherit; color: var(--ink); }
+    input:focus { outline: 2px solid color-mix(in srgb, var(--copper) 40%, transparent); border-color: var(--copper); }
+    .grid-form { display: grid; gap: 1rem; }
+    @media (min-width: 720px) { .grid-form.two { grid-template-columns: 1fr 1fr; } }
+    .consent { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.95rem; color: var(--muted); }
+    .consent input { margin-top: 0.3rem; width: 1.1rem; height: 1.1rem; accent-color: var(--copper); }
+    .note { font-size: 0.85rem; color: var(--muted); margin-top: 0.75rem; }
+    .error { color: var(--poor); font-size: 0.95rem; margin-top: 0.75rem; }
+    .results { padding: 1rem 0 4rem; display: none; }
+    .results.show { display: block; }
+    .score-row { display: grid; gap: 1.25rem; margin-bottom: 1.5rem; }
+    @media (min-width: 800px) { .score-row { grid-template-columns: 220px 1fr; align-items: center; } }
+    .dial { width: 180px; height: 180px; margin: 0 auto; border-radius: 50%; background: conic-gradient(var(--copper) calc(var(--p) * 1%), var(--paper-2) 0); display: grid; place-items: center; position: relative; }
+    .dial::before { content: ""; position: absolute; inset: 12px; background: var(--card); border-radius: 50%; border: 1px solid var(--line); }
+    .dial-inner { position: relative; text-align: center; }
+    .dial-inner strong { display: block; font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; }
+    .dial-inner span { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .cats { display: grid; gap: 1rem; }
+    @media (min-width: 720px) { .cats { grid-template-columns: 1fr 1fr; } }
+    .cat { padding: 1.1rem 1.2rem; border-radius: 1rem; border: 1px solid var(--line); background: #fff; }
+    .cat h3 { margin: 0 0 0.35rem; font-size: 1rem; display: flex; justify-content: space-between; gap: 0.75rem; }
+    .cat .s { color: var(--copper); font-family: var(--font-serif); }
+    .cat ul { margin: 0.5rem 0 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.92rem; }
+    .wins { margin-top: 1.5rem; }
+    .wins ol { margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--muted); }
+    .cta-box { margin-top: 1.75rem; padding: 1.5rem; border-radius: 1.25rem; background: var(--ink); color: #f3eee6; }
+    .cta-box h2 { font-family: var(--font-serif); font-weight: 500; margin: 0 0 0.5rem; font-size: 1.6rem; }
+    .cta-box p { margin: 0 0 1rem; color: color-mix(in srgb, #f3eee6 78%, transparent); }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .cta-box .btn { background: var(--copper); }
+    .cta-box .btn-ghost { border-color: color-mix(in srgb, #f3eee6 35%, transparent); color: #f3eee6; }
+    .cta-box .btn-ghost:hover { border-color: #f3eee6; color: #fff; background: transparent; }
+    footer.site { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; }
+    .spinner { display: inline-block; width: 1rem; height: 1rem; border: 2px solid #fff; border-right-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 0.5rem; vertical-align: -2px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap header-row">
+      <a class="brand" href="/">
+        <span>
+          <span class="brand-kicker">Creative</span>
+          <span class="brand-name">Spaces</span>
+        </span>
+      </a>
+      <nav class="desk" aria-label="Primary">
+        <a href="/#work">Work</a>
+        <a href="/services/">Services</a>
+        <a href="/contact/">Contact</a>
+        <a href="/health-check/">Health check</a>
+      </nav>
+      <div style="margin-left:auto">
+        <a class="btn" href="https://calendly.com/creative-spaces/30min">Book a time</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Free website health check</h1>
+        <p class="lead">Paste your site. In about a minute you will see a calm score for performance, SEO, trust, visual impact and local discoverability. Then book a free 15-minute chat with Chris if you want the full picture.</p>
+        <div class="card" id="form-card">
+          <form id="hc-form" novalidate>
+            <div class="grid-form two">
+              <div>
+                <label for="url">Website</label>
+                <input id="url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://yoursite.com.au" required />
+              </div>
+              <div>
+                <label for="businessName">Business name</label>
+                <input id="businessName" name="businessName" type="text" autocomplete="organization" placeholder="Your business" required />
+              </div>
+            </div>
+            <div class="grid-form" style="margin-top:1rem">
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="you@business.com.au" required />
+              </div>
+            </div>
+            <div class="hp" aria-hidden="true">
+              <label>Website company<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+            </div>
+            <div class="consent" style="margin-top:1.1rem">
+              <input id="consent" name="consent" type="checkbox" required />
+              <label for="consent" style="text-transform:none; letter-spacing:0; font-size:0.95rem; color:var(--muted); margin:0">Chris can follow up about my results. I will not be added to a marketing list automatically.</label>
+            </div>
+            <div style="margin-top:1.25rem; display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center">
+              <button class="btn" id="submit-btn" type="submit">Run free check</button>
+              <span class="note" id="status" role="status" aria-live="polite"></span>
+            </div>
+            <p class="error" id="error" hidden></p>
+            <p class="note">No ranking scrape. No invented visitor numbers. Spam Act friendly.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="results wrap" id="results" aria-live="polite">
+      <div class="score-row">
+        <div class="dial" id="dial" style="--p:0">
+          <div class="dial-inner">
+            <strong id="overall">–</strong>
+            <span>out of 100</span>
+          </div>
+        </div>
+        <div>
+          <h2 style="font-family:var(--font-serif);font-weight:500;margin:0 0 0.5rem;font-size:1.75rem" id="result-title">Your results</h2>
+          <p style="margin:0;color:var(--muted)" id="result-sub"></p>
+        </div>
+      </div>
+      <div class="cats" id="cats"></div>
+      <div class="card wins">
+        <h3 style="margin:0;font-family:var(--font-serif);font-weight:500">Top three quick wins</h3>
+        <ol id="wins"></ol>
+      </div>
+      <div class="cta-box">
+        <h2>Book a free 15-minute chat with Chris</h2>
+        <p>Walk through the score, the fixes that matter, and whether a $499 site (or a workflow add-on) is the right next step. Calendly currently offers a 30-minute slot. Ask for 15 minutes if that suits you better.</p>
+        <div class="cta-actions">
+          <a class="btn" href="https://calendly.com/creative-spaces/30min" target="_blank" rel="noopener">Book on Calendly</a>
+          <a class="btn btn-ghost" href="tel:0475689925">Call 0475 689 925</a>
+          <button class="btn btn-ghost" type="button" id="pdf-btn">Download PDF report</button>
+        </div>
+        <p class="note" style="color:color-mix(in srgb,#f3eee6 70%,transparent)" id="lead-msg"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <p>Creative Spaces · SE Melbourne · Sites from $499 AUD</p>
+      <p><a href="/">Home</a> · <a href="/contact/">Contact</a> · <a href="https://calendly.com/creative-spaces/30min">Book a time</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('hc-form');
+    const errorEl = document.getElementById('error');
+    const statusEl = document.getElementById('status');
+    const results = document.getElementById('results');
+    const submitBtn = document.getElementById('submit-btn');
+    let lastReport = null;
+
+    function scoreClass(n) {
+      if (typeof n !== 'number') return '';
+      if (n >= 8) return 'good';
+      if (n >= 5) return 'warn';
+      return 'poor';
+    }
+
+    function render(report) {
+      lastReport = report;
+      results.classList.add('show');
+      const overall = report.overall;
+      document.getElementById('overall').textContent = overall == null ? '–' : String(overall);
+      document.getElementById('dial').style.setProperty('--p', overall == null ? 0 : overall);
+      document.getElementById('result-title').textContent = report.businessName
+        ? report.businessName + ' · health check'
+        : 'Your website health check';
+      let host = report.finalUrl || report.url;
+      try { host = new URL(host).hostname; } catch {}
+      document.getElementById('result-sub').textContent = host + ' · checked ' + new Date(report.checkedAt).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' }) + ' (Melbourne time)';
+
+      const cats = document.getElementById('cats');
+      cats.innerHTML = '';
+      Object.entries(report.categories || {}).forEach(([key, cat]) => {
+        const el = document.createElement('article');
+        el.className = 'cat';
+        const score = typeof cat.score === 'number' ? cat.score + '/10' : (cat.label || 'n/a');
+        const findings = (cat.findings || []).map(f => '<li>' + f.replace(/</g,'&lt;') + '</li>').join('');
+        const opinion = cat.opinion ? '<p class="note" style="margin:0.4rem 0 0">Labelled as an AI opinion.</p>' : '';
+        const visitors = key === 'visitors' && cat.visitorLabel ? '<p class="note" style="margin:0.4rem 0 0">' + cat.visitorLabel + '</p>' : '';
+        el.innerHTML = '<h3><span>' + (cat.name || key) + '</span><span class="s">' + score + '</span></h3><ul>' + findings + '</ul>' + opinion + visitors;
+        cats.appendChild(el);
+      });
+
+      const wins = document.getElementById('wins');
+      wins.innerHTML = (report.quickWins || []).map(w => '<li>' + String(w.text).replace(/</g,'&lt;') + '</li>').join('') || '<li>No urgent gaps stood out from this pass.</li>';
+      document.getElementById('lead-msg').textContent = (report.lead && report.lead.message) || '';
+      results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.hidden = true;
+      errorEl.textContent = '';
+      statusEl.textContent = 'Running checks. This can take up to a minute.';
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span>Checking';
+
+      const payload = {
+        url: document.getElementById('url').value.trim(),
+        businessName: document.getElementById('businessName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        consent: document.getElementById('consent').checked === true,
+        website: form.website.value,
+        suburb: 'Cheltenham'
+      };
+
+      try {
+        const res = await fetch('/api/health-check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) {
+          throw new Error((data && data.error) || 'Something went wrong.');
+        }
+        if (data.ignored) {
+          statusEl.textContent = '';
+          return;
+        }
+        statusEl.textContent = 'Done.';
+        render(data);
+      } catch (err) {
+        errorEl.hidden = false;
+        errorEl.textContent = err.message || 'Could not complete the check.';
+        statusEl.textContent = '';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Run free check';
+      }
+    });
+
+    document.getElementById('pdf-btn').addEventListener('click', async () => {
+      if (!lastReport) return;
+      const btn = document.getElementById('pdf-btn');
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/health-check-pdf', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ report: lastReport })
+        });
+        if (!res.ok) throw new Error('PDF failed');
+        const blob = await res.blob();
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'creative-spaces-health-check.pdf';
+        a.click();
+        URL.revokeObjectURL(a.href);
+      } catch (e) {
+        alert('Could not download the PDF just now.');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

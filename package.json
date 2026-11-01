@@ -1,0 +1,17 @@
+{
+  "name": "creative-spaces",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Creative Spaces marketing site and website health check",
+  "scripts": {
+    "batch-health-check": "node scripts/batch-health-check.js",
+    "test:health-check": "node scripts/harness-health-check.js"
+  },
+  "dependencies": {
+    "@vercel/blob": "^0.27.3",
+    "pdf-lib": "^1.17.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
