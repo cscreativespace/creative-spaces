@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Health check leads | Creative Spaces</title>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, sans-serif; background:#f3eee6; color:#2B2A28; margin:0; padding:2rem; }
+    input, button { height:2.5rem; padding:0 0.75rem; border-radius:0.5rem; border:1px solid #d8d0c3; font:inherit; }
+    button { background:#C0613B; color:#fff; border:0; cursor:pointer; }
+    table { width:100%; border-collapse: collapse; margin-top:1rem; background:#fff; }
+    th, td { border-bottom:1px solid #e6dfd2; text-align:left; padding:0.6rem; font-size:0.9rem; }
+    .muted { color:#5e574e; }
+  </style>
+</head>
+<body>
+  <h1>Health check leads</h1>
+  <p class="muted">Password protected. Storage uses Vercel Blob when configured.</p>
+  <div>
+    <input id="key" type="password" placeholder="Admin password" />
+    <button id="load" type="button">Load</button>
+    <button id="csv" type="button">Export CSV</button>
+  </div>
+  <p id="status" class="muted"></p>
+  <table>
+    <thead><tr><th>When</th><th>Business</th><th>Email</th><th>URL</th><th>Score</th><th>Consent</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <script>
+    async function fetchJson() {
+      const key = document.getElementById('key').value;
+      const res = await fetch('/api/admin/health-checks', { headers: { Authorization: 'Bearer ' + key } });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed');
+      return data;
+    }
+    document.getElementById('load').onclick = async () => {
+      const status = document.getElementById('status');
+      try {
+        const data = await fetchJson();
+        status.textContent = data.storage + ' · ' + data.count + ' records' + (data.reason ? ' (' + data.reason + ')' : '');
+        const rows = document.getElementById('rows');
+        rows.innerHTML = (data.items || []).map(i => '<tr><td>' + (i.checkedAt||'') + '</td><td>' + (i.businessName||'') + '</td><td>' + (i.email||'') + '</td><td>' + (i.url||'') + '</td><td>' + (i.overall??'') + '</td><td>' + (i.consent?'yes':'no') + '</td></tr>').join('') || '<tr><td colspan="6">No leads stored yet.</td></tr>';
+      } catch (e) {
+        status.textContent = e.message;
+      }
+    };
+    document.getElementById('csv').onclick = () => {
+      const key = document.getElementById('key').value;
+      window.location.href = '/api/admin/health-checks?format=csv&key=' + encodeURIComponent(key);
+    };
+  </script>
+</body>
+</html>
