@@ -88,6 +88,8 @@ function extractMeta(html) {
   let withAlt = 0;
   let withoutAlt = 0;
   for (const [tag] of imgs) {
+    // Decorative images marked aria-hidden should not count against alt coverage.
+    if (/\baria-hidden\s*=\s*["']true["']/i.test(tag)) continue;
     const alt = tag.match(/\balt\s*=\s*["']([^"']*)["']/i);
     if (alt && alt[1].trim()) withAlt += 1;
     else withoutAlt += 1;
@@ -124,7 +126,7 @@ function extractMeta(html) {
     ogDescription,
     ogImage,
     h1s,
-    imageAlt: { withAlt, withoutAlt, total: imgs.length },
+    imageAlt: { withAlt, withoutAlt, total: withAlt + withoutAlt },
     hasTel,
     hasMailto,
     hasAddress,
@@ -413,22 +415,21 @@ function scoreVisitors(analytics) {
   const findings = [];
   if (analytics.length) {
     findings.push(`Analytics detected: ${analytics.join(', ')}.`);
-    findings.push('Visitor numbers are unknown from the outside. Let us look together on your call.');
     return {
-      score: 7,
+      score: 8,
       findings,
       visitorCount: null,
-      visitorLabel: 'Unknown, let us look together on your call',
+      visitorLabel: null,
       analytics,
     };
   }
   findings.push('No common analytics tools detected on the homepage.');
-  findings.push('Visitor numbers are unknown. Let us look together on your call.');
+  findings.push('Visitor numbers are unknown from the outside. Let us look together on your call.');
   return {
     score: 4,
     findings,
     visitorCount: null,
-    visitorLabel: 'Unknown, let us look together on your call',
+    visitorLabel: null,
     analytics: [],
   };
 }
@@ -512,16 +513,20 @@ function suggestOffers({ categories, techStack, overall }) {
 
 function topQuickWins(categories) {
   const skip = (text) =>
-    /on-page signals check|unknown from the outside|let us look together|AI opinion unavailable|could not be measured/i.test(
+    /on-page signals check|unknown from the outside|let us look together|AI opinion unavailable|could not be measured|analytics detected|look solid|look healthy|look present|strong on mobile|info only, not a penalty|based on google pagespeed|lighthouse seo category scored/i.test(
+      text || ''
+    );
+  const isIssue = (text) =>
+    /\b(no |not |missing|weak|thin|incomplete|out of date|slow|many images|more than one|unavailable|absent|without|lacks|dilute|room to improve|fail)\b/i.test(
       text || ''
     );
   const items = [];
   for (const [key, cat] of Object.entries(categories)) {
+    if (typeof cat.score !== 'number' || cat.score > 7) continue;
     for (const text of cat.findings || []) {
       if (skip(text)) continue;
-      if (typeof cat.score === 'number' && cat.score <= 7) {
-        items.push({ category: key, text, score: cat.score });
-      }
+      if (!isIssue(text)) continue;
+      items.push({ category: key, text, score: cat.score });
     }
   }
   items.sort((a, b) => a.score - b.score);
