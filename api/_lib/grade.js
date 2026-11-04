@@ -440,6 +440,76 @@ function overallFromCategories(cats) {
   return Math.round(avg * 10);
 }
 
+function suggestOffers({ categories, techStack, overall }) {
+  const cats = categories || {};
+  const tech = techStack || [];
+  const hasShop = tech.some((t) => /Shopify|WooCommerce|Square Online/i.test(t));
+  const visitors = cats.visitors || {};
+  const quality = cats.quality || {};
+  const visual = cats.visual || {};
+  const performance = cats.performance || {};
+  const seo = cats.seo || {};
+  const weakSite =
+    (typeof overall === 'number' && overall < 70) ||
+    (typeof performance.score === 'number' && performance.score <= 5) ||
+    (typeof visual.score === 'number' && visual.score <= 5) ||
+    (typeof seo.score === 'number' && seo.score <= 5) ||
+    (typeof quality.score === 'number' && quality.score <= 5);
+  const needsWorkflow =
+    (typeof visitors.score === 'number' && visitors.score <= 5) ||
+    !(visitors.analytics && visitors.analytics.length) ||
+    (quality.findings || []).some((f) => /phone or email/i.test(f));
+
+  let featured = 'studio';
+  let reason = 'A clear five-page site is usually the first fix when the foundation is soft.';
+  if (hasShop) {
+    featured = 'platform';
+    reason = 'A shop stack is already in play, so the ecommerce package is the closest fit.';
+  } else if (needsWorkflow && !weakSite) {
+    featured = 'campaign';
+    reason = 'Enquiry capture and follow-up look like the gap, which is the workflow package.';
+  } else if (needsWorkflow && weakSite) {
+    featured = 'studio';
+    reason = 'Start with the five-page site, then add workflows once the foundation is solid.';
+  } else if (weakSite) {
+    featured = 'studio';
+    reason = 'Performance, clarity or trust scores point to a cleaner five-page site first.';
+  } else {
+    featured = 'campaign';
+    reason = 'The site basics look steady. Workflows are the usual next step.';
+  }
+
+  const tiers = [
+    {
+      key: 'studio',
+      price: '$499',
+      name: 'Five-page custom website',
+      blurb: 'Five-page custom website.',
+      href: '/pay/studio',
+    },
+    {
+      key: 'campaign',
+      price: '$899',
+      name: 'AI & workflow integrations',
+      blurb: 'AI and workflow integrations, including enquiry capture and automations.',
+      href: '/pay/campaign',
+    },
+    {
+      key: 'platform',
+      price: '$1,299',
+      name: 'Ecommerce',
+      blurb: 'Ecommerce for an online shop.',
+      href: '/pay/platform',
+    },
+  ];
+
+  return {
+    featured,
+    reason,
+    tiers: tiers.map((t) => ({ ...t, featured: t.key === featured })),
+  };
+}
+
 function topQuickWins(categories) {
   const skip = (text) =>
     /on-page signals check|unknown from the outside|let us look together|AI opinion unavailable|could not be measured/i.test(
@@ -571,6 +641,7 @@ async function gradeSite({ url, businessName, suburbHint }) {
     },
     screenshotAvailable: !!screenshot,
     psiError,
+    offers: suggestOffers({ categories, techStack, overall }),
     cta: {
       label: 'Book a free 15-minute chat with Chris',
       href: 'https://calendly.com/creative-spaces/30min',
@@ -587,4 +658,5 @@ module.exports = {
   extractMeta,
   runPageSpeed,
   extractScreenshot,
+  suggestOffers,
 };
