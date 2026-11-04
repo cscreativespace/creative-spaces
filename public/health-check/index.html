@@ -92,6 +92,25 @@
     .cta-box .btn { background: var(--copper); }
     .cta-box .btn-ghost { border-color: color-mix(in srgb, #f3eee6 35%, transparent); color: #f3eee6; }
     .cta-box .btn-ghost:hover { border-color: #f3eee6; color: #fff; background: transparent; }
+    .tiers { margin-top: 1.75rem; }
+    .tiers h2 { font-family: var(--font-serif); font-weight: 500; margin: 0 0 0.4rem; font-size: 1.5rem; }
+    .tiers .lead { margin: 0 0 1rem; color: var(--muted); }
+    .tier-grid { display: grid; gap: 0.85rem; }
+    @media (min-width: 800px) { .tier-grid { grid-template-columns: repeat(3, 1fr); } }
+    .tier {
+      display: flex; flex-direction: column; gap: 0.35rem;
+      padding: 1.1rem 1.15rem; border-radius: 1rem;
+      border: 1px solid var(--line); background: #fff;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .tier:hover { border-color: var(--copper); color: inherit; box-shadow: 0 8px 24px color-mix(in srgb, var(--ink) 6%, transparent); }
+    .tier.featured { border-color: var(--copper); box-shadow: 0 0 0 1px var(--copper); }
+    .tier .kicker { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0; }
+    .tier.featured .kicker { color: var(--copper); }
+    .tier .price { font-family: var(--font-serif); font-size: 1.75rem; margin: 0; letter-spacing: -0.02em; }
+    .tier .name { margin: 0; font-weight: 500; }
+    .tier .blurb { margin: 0; color: var(--muted); font-size: 0.92rem; }
     footer.site { border-top: 1px solid var(--line); padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; }
     .spinner { display: inline-block; width: 1rem; height: 1rem; border: 2px solid #fff; border-right-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 0.5rem; vertical-align: -2px; }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -178,9 +197,33 @@
         <h3 style="margin:0;font-family:var(--font-serif);font-weight:500">Top three quick wins</h3>
         <ol id="wins"></ol>
       </div>
+      <div class="tiers" id="tiers">
+        <h2>Published prices, if you want this fixed</h2>
+        <p class="lead" id="tier-reason">Three fixed packages. One may fit the findings above more closely.</p>
+        <div class="tier-grid" id="tier-grid">
+          <a class="tier" id="tier-studio" href="/pay/studio">
+            <p class="kicker">The website</p>
+            <p class="price">$499</p>
+            <p class="name">Five-page custom website</p>
+            <p class="blurb">Five-page custom website.</p>
+          </a>
+          <a class="tier" id="tier-campaign" href="/pay/campaign">
+            <p class="kicker">After the enquiry</p>
+            <p class="price">$899</p>
+            <p class="name">AI &amp; workflow integrations</p>
+            <p class="blurb">Enquiry capture and automations.</p>
+          </a>
+          <a class="tier" id="tier-platform" href="/pay/platform">
+            <p class="kicker">When you need to sell</p>
+            <p class="price">$1,299</p>
+            <p class="name">Ecommerce</p>
+            <p class="blurb">An online shop.</p>
+          </a>
+        </div>
+      </div>
       <div class="cta-box">
         <h2>Book a free 15-minute chat with Chris</h2>
-        <p>Walk through the score, the fixes that matter, and whether a $499 site (or a workflow add-on) is the right next step. Calendly currently offers a 30-minute slot. Ask for 15 minutes if that suits you better.</p>
+        <p>Walk through the score, the fixes that matter, and which package fits. Calendly currently offers a 30-minute slot. Ask for 15 minutes if that suits you better.</p>
         <div class="cta-actions">
           <a class="btn" href="https://calendly.com/creative-spaces/30min" target="_blank" rel="noopener">Book on Calendly</a>
           <a class="btn btn-ghost" href="tel:0475689925">Call 0475 689 925</a>
@@ -193,7 +236,7 @@
 
   <footer class="site">
     <div class="wrap">
-      <p>Creative Spaces · SE Melbourne · Sites from $499 AUD</p>
+      <p>Creative Spaces · SE Melbourne · $499 · $899 · $1,299 AUD</p>
       <p><a href="/">Home</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="https://calendly.com/creative-spaces/30min">Book a time</a></p>
     </div>
   </footer>
@@ -242,6 +285,20 @@
       const wins = document.getElementById('wins');
       wins.innerHTML = (report.quickWins || []).map(w => '<li>' + String(w.text).replace(/</g,'&lt;') + '</li>').join('') || '<li>No urgent gaps stood out from this pass.</li>';
       document.getElementById('lead-msg').textContent = (report.lead && report.lead.message) || '';
+
+      const offers = report.offers || {};
+      const reasonEl = document.getElementById('tier-reason');
+      if (reasonEl) {
+        reasonEl.textContent = offers.reason || 'Three fixed packages. One may fit the findings above more closely.';
+      }
+      ['studio', 'campaign', 'platform'].forEach(function (key) {
+        const el = document.getElementById('tier-' + key);
+        if (!el) return;
+        el.classList.toggle('featured', offers.featured === key);
+        const tier = (offers.tiers || []).find(function (t) { return t.key === key; });
+        if (tier && tier.href) el.setAttribute('href', tier.href);
+      });
+
       results.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 

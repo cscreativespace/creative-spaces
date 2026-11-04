@@ -18,6 +18,7 @@ async function main() {
         overall: report.overall,
         categories: Object.fromEntries(Object.entries(report.categories).map(([k,v]) => [k, { score: v.score, findings: v.findings }])),
         quickWins: report.quickWins,
+        offers: report.offers,
         psiError: report.psiError,
         durationMs: report.durationMs,
       }, null, 2));

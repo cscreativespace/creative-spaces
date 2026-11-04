@@ -153,6 +153,31 @@ module.exports = async function handler(req, res) {
     }
 
     y -= 18;
+    page.drawText('Published prices', { x: 48, y, size: 12, font: fontBold, color: ink });
+    y -= 14;
+    const offerLines = [
+      '$499 — Five-page custom website — creative-spaces.com.au/pay/studio',
+      '$899 — AI & workflow integrations — creative-spaces.com.au/pay/campaign',
+      '$1,299 — Ecommerce (online shop) — creative-spaces.com.au/pay/platform',
+    ];
+    const featured = report.offers && report.offers.featured;
+    const reason = report.offers && report.offers.reason;
+    if (reason) {
+      for (const line of wrap(reason, 88)) {
+        page.drawText(line, { x: 48, y, size: 9, font, color: muted });
+        y -= 12;
+      }
+      y -= 4;
+    }
+    for (const line of offerLines) {
+      const mark = (featured === 'studio' && line.startsWith('$499'))
+        || (featured === 'campaign' && line.startsWith('$899'))
+        || (featured === 'platform' && line.startsWith('$1,299'));
+      page.drawText((mark ? '→ ' : '  ') + line, { x: 48, y, size: 9, font: mark ? fontBold : font, color: mark ? copper : ink });
+      y -= 12;
+    }
+
+    y -= 14;
     page.drawText('Book a free 15-minute chat with Chris', { x: 48, y, size: 12, font: fontBold, color: copper });
     y -= 14;
     page.drawText('https://calendly.com/creative-spaces/30min', { x: 48, y, size: 10, font, color: ink });
