@@ -17,4 +17,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://creative-spaces.com.au/portfolio/</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://creative-spaces.com.au/what-we-do/</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
 </urlset>
